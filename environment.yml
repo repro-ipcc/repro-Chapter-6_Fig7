@@ -1,0 +1,13 @@
+name: ipcc_ch6f7
+channels:
+  - conda-forge
+  - anaconda
+
+dependencies:
+  - python=3.9
+  - pandas
+  - numpy
+  - matplotlib
+  - netCDF4
+  - basemap
+

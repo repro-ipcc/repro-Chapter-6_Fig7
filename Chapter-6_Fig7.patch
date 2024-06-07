@@ -1,0 +1,293 @@
+diff --git a/Fig6.7_violin_regions.py b/Fig6.7_violin_regions.py
+index 4ccc420..f4a2616 100644
+--- a/Fig6.7_violin_regions.py
++++ b/Fig6.7_violin_regions.py
+@@ -1,29 +1,42 @@
+ import numpy as np
+ from netCDF4 import Dataset
+ import matplotlib.pyplot as plt
++import sys
+ 
++import warnings
++warnings.simplefilter('ignore')
+ 
+-regionnum=1 #Southern Asia 
+-#regionnum=2 #Europe
+-#regionnum=3 #Africa
+-#regionnum=4 #South-East Asia and Developing Pacific
+-#regionnum=5 #Latin America and Caribbean
+-#regionnum=6 #Eurasia
+-#regionnum=7 #Asia-Pacific Developed
+-#regionnum=8 #Middle East
+-#regionnum=9 #North America rural
+-#regionnum=10 #Eastern Asia 
+-#regionnum=11 #North America urban
+-#regionnum=12 #example 
+-
+-AR6_file = Dataset('../input/AR6WG3_Atlas_IntermedRegions_1.0x1.0.nc','r')
++
++# get regionnum from command
++regionnum = int(sys.argv[1])
++
++# dict for different regions
++regions = {
++    1: "Southern_Asia",
++    2: "Europe",
++    3: "Africa",
++    4: "South_East_Asia_and_Developing_Pacific",
++    5: "Latin_America_and_Caribbean",
++    6: "Eurasia",
++    7: "Asia_Pacific_Developed",
++    8: "Middle_East",
++    9: "North_America_rural",
++    10: "Eastern_Asia",
++    11: "North_America_urban",
++    12: "example"
++}
++
++
++DIR = "../dap.ceda.ac.uk/badc/ar6_wg1/data/ch_06/inputdata_ch6_fig07/v20230210/"
++
++AR6_file = Dataset(DIR+'AR6WG3_Atlas_IntermedRegions_1.0x1.0.nc','r')
+ AR6 = AR6_file.variables["AR6WG3RegionIntm"][:,:]
+ lat_in = AR6_file.variables['latitude'][:]
+ lon_in = AR6_file.variables['longitude'][:]
+ 
+ if regionnum==12:
+ 
+-   SO4_file = Dataset('../input/Europe/EMEP/Aas/SO4mm_month_2000-2018_pm25.nc','r')
++   SO4_file = Dataset(DIR+'Europe/EMEP/Aas/SO4mm_month_2000-2018_pm25.nc','r')
+ 
+    SO4 = SO4_file.variables["DATA"][:,:]
+    LON_SO4 = SO4_file.variables["LON"][:,:]
+@@ -41,10 +54,10 @@ if regionnum==12:
+    
+ if regionnum==1 or regionnum==3 or regionnum==5 or regionnum==8:
+ 
+-   NH4_file = Dataset('../input/SPARTAN/NH4_month_2013-2019.nc','r')
+-   NO3_file = Dataset('../input/SPARTAN/NO3_month_2013-2019.nc','r')
+-   SO4_file = Dataset('../input/SPARTAN/SO4_month_2013-2019.nc','r')
+-   Na_file  = Dataset('../input/SPARTAN/Na_month_2013-2019.nc','r')
++   NH4_file = Dataset(DIR+'SPARTAN/NH4_month_2013-2019.nc','r')
++   NO3_file = Dataset(DIR+'SPARTAN/NO3_month_2013-2019.nc','r')
++   SO4_file = Dataset(DIR+'SPARTAN/SO4_month_2013-2019.nc','r')
++   Na_file  = Dataset(DIR+'SPARTAN/Na_month_2013-2019.nc','r')
+ 
+    LON = SO4_file.variables["LON"][:,:]
+    LAT = SO4_file.variables["LAT"][:,:]
+@@ -63,13 +76,13 @@ if regionnum==1 or regionnum==3 or regionnum==5 or regionnum==8:
+    
+ if regionnum==2:
+ 
+-   OC_file  = Dataset('../input/Europe/EMEP/Aas/OC_month_2000-2018_pm25.nc','r')
+-   NH4_file = Dataset('../input/Europe/EMEP/Aas/NH4p_month_2000-2018_pm25.nc','r')
+-   Na_file  = Dataset('../input/Europe/EMEP/Aas/Nap_month_2000-2018_pm25.nc','r')
+-   Cl_file  = Dataset('../input/Europe/EMEP/Aas/Clm_month_2000-2018_pm25.nc','r')
+-   NO3_file = Dataset('../input/Europe/EMEP/Aas/NO3m_month_2000-2018_pm25.nc','r')
+-   SO4_file = Dataset('../input/Europe/EMEP/Aas/SO4mm_month_2000-2018_pm25.nc','r')
+-   EC_file  = Dataset('../input/Europe/EMEP/Aas/EC_month_2000-2018_pm25.nc','r')
++   OC_file  = Dataset(DIR+'Europe/EMEP/Aas/OC_month_2000-2018_pm25.nc','r')
++   NH4_file = Dataset(DIR+'Europe/EMEP/Aas/NH4p_month_2000-2018_pm25.nc','r')
++   Na_file  = Dataset(DIR+'Europe/EMEP/Aas/Nap_month_2000-2018_pm25.nc','r')
++   Cl_file  = Dataset(DIR+'Europe/EMEP/Aas/Clm_month_2000-2018_pm25.nc','r')
++   NO3_file = Dataset(DIR+'Europe/EMEP/Aas/NO3m_month_2000-2018_pm25.nc','r')
++   SO4_file = Dataset(DIR+'Europe/EMEP/Aas/SO4mm_month_2000-2018_pm25.nc','r')
++   EC_file  = Dataset(DIR+'Europe/EMEP/Aas/EC_month_2000-2018_pm25.nc','r')
+ 
+    ORG = OC_file.variables["DATA"][:,:]
+    LON_ORG = OC_file.variables["LON"][:,:]
+@@ -165,10 +178,10 @@ if regionnum==2:
+ 
+ if regionnum==4 or regionnum==10:
+ 
+-   NH4_spar = Dataset('../input/SPARTAN/NH4_month_2013-2019.nc','r')
+-   NO3_spar = Dataset('../input/SPARTAN/NO3_month_2013-2019.nc','r')
+-   SO4_spar = Dataset('../input/SPARTAN/SO4_month_2013-2019.nc','r')
+-   Na_spar = Dataset('../input/SPARTAN/Na_month_2013-2019.nc','r')
++   NH4_spar = Dataset(DIR+'SPARTAN/NH4_month_2013-2019.nc','r')
++   NO3_spar = Dataset(DIR+'SPARTAN/NO3_month_2013-2019.nc','r')
++   SO4_spar = Dataset(DIR+'SPARTAN/SO4_month_2013-2019.nc','r')
++   Na_spar = Dataset(DIR+'SPARTAN/Na_month_2013-2019.nc','r')
+ 
+    LONs = SO4_spar.variables["LON"][:,:]
+    LATs = SO4_spar.variables["LAT"][:,:]
+@@ -187,12 +200,12 @@ if regionnum==4 or regionnum==10:
+             if lat_in[lt] <= (LAT[0,j]+0.5) and lat_in[lt] >= (LAT[0,j]-0.5) and lon_in[ln] >= (LON[0,j]-0.5) and lon_in[ln] <= (LON[0,j]+0.5):
+                  regi[:,j]=AR6[lt,ln]
+ 
+-   OC_file  = Dataset('../input/Asia/EANET/TotOC_month_2001-2010.nc','r')
+-   NH4_file = Dataset('../input/Asia/EANET/NH4p_month_2001-2017.nc','r')
+-   Na_file  = Dataset('../input/Asia/EANET/Nap_month_2001-2017.nc','r')
+-   Cl_file  = Dataset('../input/Asia/EANET/Clm_month_2001-2017.nc','r')
+-   NO3_file = Dataset('../input/Asia/EANET/NO3m_month_2001-2017.nc','r')
+-   SO4_file = Dataset('../input/Asia/EANET/SO4mm_month_2001-2017.nc','r')
++   OC_file  = Dataset(DIR+'Asia/EANET/TotOC_month_2001-2010.nc','r')
++   NH4_file = Dataset(DIR+'Asia/EANET/NH4p_month_2001-2017.nc','r')
++   Na_file  = Dataset(DIR+'Asia/EANET/Nap_month_2001-2017.nc','r')
++   Cl_file  = Dataset(DIR+'Asia/EANET/Clm_month_2001-2017.nc','r')
++   NO3_file = Dataset(DIR+'Asia/EANET/NO3m_month_2001-2017.nc','r')
++   SO4_file = Dataset(DIR+'Asia/EANET/SO4mm_month_2001-2017.nc','r')
+ 
+    ORG = OC_file.variables["DATA"][:,:]
+    LON_ORG = OC_file.variables["LON"][:,:]
+@@ -235,13 +248,13 @@ if regionnum==4 or regionnum==10:
+ 
+ if regionnum==6:
+ 
+-   OC_file  = Dataset('../input/Europe/EMEP/Aas/OC_month_2000-2018_pm25.nc','r')
+-   NH4_file = Dataset('../input/Europe/EMEP/Aas/NH4p_month_2000-2018_pm25.nc','r')
+-   Na_file  = Dataset('../input/Europe/EMEP/Aas/Nap_month_2000-2018_pm25.nc','r')
+-   Cl_file  = Dataset('../input/Europe/EMEP/Aas/Clm_month_2000-2018_pm25.nc','r')
+-   NO3_file = Dataset('../input/Europe/EMEP/Aas/NO3m_month_2000-2018_pm25.nc','r')
+-   SO4_file = Dataset('../input/Europe/EMEP/Aas/SO4mm_month_2000-2018_pm25.nc','r')
+-   EC_file  = Dataset('../input/Europe/EMEP/Aas/EC_month_2000-2018_pm25.nc','r')
++   OC_file  = Dataset(DIR+'Europe/EMEP/Aas/OC_month_2000-2018_pm25.nc','r')
++   NH4_file = Dataset(DIR+'Europe/EMEP/Aas/NH4p_month_2000-2018_pm25.nc','r')
++   Na_file  = Dataset(DIR+'Europe/EMEP/Aas/Nap_month_2000-2018_pm25.nc','r')
++   Cl_file  = Dataset(DIR+'Europe/EMEP/Aas/Clm_month_2000-2018_pm25.nc','r')
++   NO3_file = Dataset(DIR+'Europe/EMEP/Aas/NO3m_month_2000-2018_pm25.nc','r')
++   SO4_file = Dataset(DIR+'Europe/EMEP/Aas/SO4mm_month_2000-2018_pm25.nc','r')
++   EC_file  = Dataset(DIR+'Europe/EMEP/Aas/EC_month_2000-2018_pm25.nc','r')
+ 
+    ORG = OC_file.variables["DATA"][:,:]
+    LON_ORG = OC_file.variables["LON"][:,:]
+@@ -335,11 +348,11 @@ if regionnum==6:
+             if lat_in[lt] <= (LAT[0,j]+0.5) and lat_in[lt] >= (LAT[0,j]-0.5) and lon_in[ln] >= (LON[0,j]-0.5) and lon_in[ln] <= (LON[0,j]+0.5):
+                  regi_EC[:,j]=AR6[lt,ln]
+ 
+-   NH4e_file = Dataset('../input/Asia/EANET/NH4p_month_2001-2017.nc','r')
+-   Nae_file  = Dataset('../input/Asia/EANET/Nap_month_2001-2017.nc','r')
+-   Cle_file  = Dataset('../input/Asia/EANET/Clm_month_2001-2017.nc','r')
+-   NO3e_file = Dataset('../input/Asia/EANET/NO3m_month_2001-2017.nc','r')
+-   SO4e_file = Dataset('../input/Asia/EANET/SO4mm_month_2001-2017.nc','r')
++   NH4e_file = Dataset(DIR+'Asia/EANET/NH4p_month_2001-2017.nc','r')
++   Nae_file  = Dataset(DIR+'Asia/EANET/Nap_month_2001-2017.nc','r')
++   Cle_file  = Dataset(DIR+'Asia/EANET/Clm_month_2001-2017.nc','r')
++   NO3e_file = Dataset(DIR+'Asia/EANET/NO3m_month_2001-2017.nc','r')
++   SO4e_file = Dataset(DIR+'Asia/EANET/SO4mm_month_2001-2017.nc','r')
+ 
+    NH4e = NH4e_file.variables["DATA"][:,:]
+    LONe_NH4 = NH4e_file.variables["LON"][:,:]
+@@ -362,12 +375,12 @@ if regionnum==6:
+ 
+ if regionnum==7:
+ 
+-   ORGe_file = Dataset('../input/Asia/EANET/TotOC_month_2001-2010.nc','r')
+-   NH4e_file = Dataset('../input/Asia/EANET/NH4p_month_2001-2017.nc','r')
+-   Nae_file  = Dataset('../input/Asia/EANET/Nap_month_2001-2017.nc','r')
+-   Cle_file  = Dataset('../input/Asia/EANET/Clm_month_2001-2017.nc','r')
+-   NO3e_file = Dataset('../input/Asia/EANET/NO3m_month_2001-2017.nc','r')
+-   SO4e_file = Dataset('../input/Asia/EANET/SO4mm_month_2001-2017.nc','r')
++   ORGe_file = Dataset(DIR+'Asia/EANET/TotOC_month_2001-2010.nc','r')
++   NH4e_file = Dataset(DIR+'Asia/EANET/NH4p_month_2001-2017.nc','r')
++   Nae_file  = Dataset(DIR+'Asia/EANET/Nap_month_2001-2017.nc','r')
++   Cle_file  = Dataset(DIR+'Asia/EANET/Clm_month_2001-2017.nc','r')
++   NO3e_file = Dataset(DIR+'Asia/EANET/NO3m_month_2001-2017.nc','r')
++   SO4e_file = Dataset(DIR+'Asia/EANET/SO4mm_month_2001-2017.nc','r')
+ 
+    ORGe = ORGe_file.variables["DATA"][:,:]
+    LONe_ORG = ORGe_file.variables["LON"][:,:]
+@@ -402,13 +415,13 @@ if regionnum==7:
+ 
+ if regionnum==9:
+ 
+-   OC_file  = Dataset('../input/North_America/IMPROVE/OC_month_2000-2018.nc','r')
+-   NH4_file = Dataset('../input/North_America/IMPROVE/NH4_month_2000-2018.nc','r')
+-   Na_file  = Dataset('../input/North_America/IMPROVE/Na_month_2000-2018.nc','r')
+-   Cl_file  = Dataset('../input/North_America/IMPROVE/Cl_month_2000-2018.nc','r')
+-   NO3_file = Dataset('../input/North_America/IMPROVE/NO3_month_2000-2018.nc','r')
+-   SO4_file = Dataset('../input/North_America/IMPROVE/SO4_month_2000-2018.nc','r')
+-   EC_file  = Dataset('../input/North_America/IMPROVE/EC_month_2000-2018.nc','r')
++   OC_file  = Dataset(DIR+'North_America/IMPROVE/OC_month_2000-2018.nc','r')
++   NH4_file = Dataset(DIR+'North_America/IMPROVE/NH4_month_2000-2018.nc','r')
++   Na_file  = Dataset(DIR+'North_America/IMPROVE/Na_month_2000-2018.nc','r')
++   Cl_file  = Dataset(DIR+'North_America/IMPROVE/Cl_month_2000-2018.nc','r')
++   NO3_file = Dataset(DIR+'North_America/IMPROVE/NO3_month_2000-2018.nc','r')
++   SO4_file = Dataset(DIR+'North_America/IMPROVE/SO4_month_2000-2018.nc','r')
++   EC_file  = Dataset(DIR+'North_America/IMPROVE/EC_month_2000-2018.nc','r')
+ 
+    ORG = OC_file.variables["DATA"][:,:]
+    LON_ORG = OC_file.variables["LON"][:,:]
+@@ -431,10 +444,10 @@ if regionnum==9:
+ #                 regimprove[:,j]=AR6[lt,ln]
+ 
+ if regionnum==11:
+-   NH4_spar = Dataset('../input/SPARTAN/NH4_month_2013-2019.nc','r')
+-   NO3_spar = Dataset('../input/SPARTAN/NO3_month_2013-2019.nc','r')
+-   SO4_spar = Dataset('../input/SPARTAN/SO4_month_2013-2019.nc','r')
+-   Na_spar = Dataset('../input/SPARTAN/Na_month_2013-2019.nc','r')
++   NH4_spar = Dataset(DIR+'SPARTAN/NH4_month_2013-2019.nc','r')
++   NO3_spar = Dataset(DIR+'SPARTAN/NO3_month_2013-2019.nc','r')
++   SO4_spar = Dataset(DIR+'SPARTAN/SO4_month_2013-2019.nc','r')
++   Na_spar = Dataset(DIR+'SPARTAN/Na_month_2013-2019.nc','r')
+ 
+    LONs = SO4_spar.variables["LON"][:,:]
+    LATs = SO4_spar.variables["LAT"][:,:]
+@@ -453,13 +466,13 @@ if regionnum==11:
+             if lat_in[lt] <= (LAT[0,j]+0.5) and lat_in[lt] >= (LAT[0,j]-0.5) and lon_in[ln] >= (LON[0,j]-0.5) and lon_in[ln] <= (LON[0,j]+0.5):
+                  regi[:,j]=AR6[lt,ln]
+ 
+-   OC_file  = Dataset('../input/North_America/EPA/OC_month_2000-2018.nc','r')
+-   NH4_file = Dataset('../input/North_America/EPA/NH4_month_2000-2018.nc','r')
+-   Na_file  = Dataset('../input/North_America/EPA/Na_month_2000-2018.nc','r')
+-   Cl_file  = Dataset('../input/North_America/EPA/Cl_month_2000-2018.nc','r')
+-   NO3_file = Dataset('../input/North_America/EPA/NO3_month_2000-2018.nc','r')
+-   SO4_file = Dataset('../input/North_America/EPA/SO4_month_2000-2018.nc','r')
+-   EC_file  = Dataset('../input/North_America/EPA/EC_month_2000-2018.nc','r')
++   OC_file  = Dataset(DIR+'North_America/EPA/OC_month_2000-2018.nc','r')
++   NH4_file = Dataset(DIR+'North_America/EPA/NH4_month_2000-2018.nc','r')
++   Na_file  = Dataset(DIR+'North_America/EPA/Na_month_2000-2018.nc','r')
++   Cl_file  = Dataset(DIR+'North_America/EPA/Cl_month_2000-2018.nc','r')
++   NO3_file = Dataset(DIR+'North_America/EPA/NO3_month_2000-2018.nc','r')
++   SO4_file = Dataset(DIR+'North_America/EPA/SO4_month_2000-2018.nc','r')
++   EC_file  = Dataset(DIR+'North_America/EPA/EC_month_2000-2018.nc','r')
+ 
+    ORG = OC_file.variables["DATA"][:,:]
+    LON_ORG = OC_file.variables["LON"][:,:]
+@@ -1022,7 +1035,8 @@ else:
+    plt.tick_params(top=False,bottom=False,left=False,right=False,labelleft=False,labelbottom=False)
+ 
+ # Save the figure
+-fig.savefig('Southern_Asia.png', bbox_inches='tight')
++fig.savefig(regions[regionnum]+'.png', bbox_inches='tight')
++fig.savefig(regions[regionnum]+'.svg')
+ plt.show()
+ 
+ #
+diff --git a/Fig6.7_worldmap_AR6_nocoasts.py b/Fig6.7_worldmap_AR6_nocoasts.py
+index ccb11f9..380337f 100644
+--- a/Fig6.7_worldmap_AR6_nocoasts.py
++++ b/Fig6.7_worldmap_AR6_nocoasts.py
+@@ -6,15 +6,16 @@ import matplotlib.pyplot as plt
+ import matplotlib as mpl
+ 
+ #sys.setrecursionlimit(limit)
++DIR = "../dap.ceda.ac.uk/badc/ar6_wg1/data/ch_06/inputdata_ch6_fig07/v20230210/"
+ 
+-AR6_file = Dataset('../input/AR6WG3_Atlas_IntermedRegions_1.0x1.0.nc','r')
+-IMPROVE_file = Dataset('../input/stations/IMPROVE.nc','r')
+-EPA_file     = Dataset('../input/stations/EPA.nc','r')
+-EMEP_file    = Dataset('../input/stations/EMEP.nc','r')
+-EMEP2_file   = Dataset('../input/stations/EMEP2.nc','r')
+-EANET_file   = Dataset('../input/stations/EANET.nc','r')
+-EASIA_file   = Dataset('../input/stations/EASIA.nc','r')
+-SPARTAN_file = Dataset('../input/stations/SPARTAN.nc','r')
++AR6_file = Dataset(DIR+'AR6WG3_Atlas_IntermedRegions_1.0x1.0.nc','r')
++IMPROVE_file = Dataset(DIR+'stations/IMPROVE.nc','r')
++EPA_file     = Dataset(DIR+'stations/EPA.nc','r')
++EMEP_file    = Dataset(DIR+'stations/EMEP.nc','r')
++EMEP2_file   = Dataset(DIR+'stations/EMEP2.nc','r')
++EANET_file   = Dataset(DIR+'stations/EANET.nc','r')
++EASIA_file   = Dataset(DIR+'stations/EASIA.nc','r')
++SPARTAN_file = Dataset(DIR+'stations/SPARTAN.nc','r')
+ 
+ AR6=AR6_file.variables["AR6WG3RegionIntm"]
+ lat = AR6_file.variables['latitude'][:]
+@@ -125,4 +126,5 @@ plt.plot(Africa_LON_f,Africa_LAT_f,      color='k',marker='.',ms=5,ls='')
+ plt.plot(N_America_LON_f,N_America_LAT_f,color='k',marker='.',ms=5,ls='')
+ plt.plot(SPARTAN_LON_f,SPARTAN_LAT_f,    color='k',marker='.',ms=5,ls='')
+ plt.savefig('worldmap_25.01.21.png', dpi=300)
+-plt.show()
++plt.savefig('worldmap_25.01.21.svg')
++plt.show()
+\ No newline at end of file
