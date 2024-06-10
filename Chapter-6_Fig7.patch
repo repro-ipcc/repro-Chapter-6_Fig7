@@ -1,5 +1,5 @@
 diff --git a/Fig6.7_violin_regions.py b/Fig6.7_violin_regions.py
-index 4ccc420..f4a2616 100644
+index 4ccc420..4786866 100644
 --- a/Fig6.7_violin_regions.py
 +++ b/Fig6.7_violin_regions.py
 @@ -1,29 +1,42 @@
@@ -250,12 +250,12 @@ index 4ccc420..f4a2616 100644
  # Save the figure
 -fig.savefig('Southern_Asia.png', bbox_inches='tight')
 +fig.savefig(regions[regionnum]+'.png', bbox_inches='tight')
-+fig.savefig(regions[regionnum]+'.svg')
++fig.savefig(regions[regionnum]+'.pdf')
  plt.show()
  
  #
 diff --git a/Fig6.7_worldmap_AR6_nocoasts.py b/Fig6.7_worldmap_AR6_nocoasts.py
-index ccb11f9..380337f 100644
+index ccb11f9..82bff87 100644
 --- a/Fig6.7_worldmap_AR6_nocoasts.py
 +++ b/Fig6.7_worldmap_AR6_nocoasts.py
 @@ -6,15 +6,16 @@ import matplotlib.pyplot as plt
@@ -283,11 +283,34 @@ index ccb11f9..380337f 100644
  
  AR6=AR6_file.variables["AR6WG3RegionIntm"]
  lat = AR6_file.variables['latitude'][:]
-@@ -125,4 +126,5 @@ plt.plot(Africa_LON_f,Africa_LAT_f,      color='k',marker='.',ms=5,ls='')
- plt.plot(N_America_LON_f,N_America_LAT_f,color='k',marker='.',ms=5,ls='')
- plt.plot(SPARTAN_LON_f,SPARTAN_LAT_f,    color='k',marker='.',ms=5,ls='')
+@@ -113,16 +114,17 @@ cmap.set_under("white")
+ m.pcolormesh(lon, lat, AR6, latlon=True,cmap=cmap)
+ plt.clim(1, 11)
+ 
+-plt.plot(IMPROVE_LON_f,IMPROVE_LAT_f,    color='k',marker='.',ms=5,ls='')
+-plt.plot(EPA_LON_f,EPA_LAT_f,            color='k',marker='.',ms=5,ls='')
+-plt.plot(EMEP_LON_f,EMEP_LAT_f,          color='k',marker='.',ms=5,ls='')
+-plt.plot(EMEP2_LON_f,EMEP2_LAT_f,        color='k',marker='.',ms=5,ls='')
+-plt.plot(EANET_LON_f,EANET_LAT_f,        color='k',marker='.',ms=5,ls='')
+-plt.plot(EASIA_LON_f,EASIA_LAT_f,        color='k',marker='.',ms=5,ls='')
+-plt.plot(ASIA_LON_f,ASIA_LAT_f,          color='k',marker='.',ms=5,ls='')
+-plt.plot(OCEANIA_LON_f,OCEANIA_LAT_f,    color='k',marker='.',ms=5,ls='')
+-plt.plot(Africa_LON_f,Africa_LAT_f,      color='k',marker='.',ms=5,ls='')
+-plt.plot(N_America_LON_f,N_America_LAT_f,color='k',marker='.',ms=5,ls='')
+-plt.plot(SPARTAN_LON_f,SPARTAN_LAT_f,    color='k',marker='.',ms=5,ls='')
++plt.plot(IMPROVE_LON_f,IMPROVE_LAT_f,    color='k',marker='.',ms=1,ls='')
++plt.plot(EPA_LON_f,EPA_LAT_f,            color='k',marker='.',ms=1,ls='')
++plt.plot(EMEP_LON_f,EMEP_LAT_f,          color='k',marker='.',ms=1,ls='')
++plt.plot(EMEP2_LON_f,EMEP2_LAT_f,        color='k',marker='.',ms=1,ls='')
++plt.plot(EANET_LON_f,EANET_LAT_f,        color='k',marker='.',ms=1,ls='')
++plt.plot(EASIA_LON_f,EASIA_LAT_f,        color='k',marker='.',ms=1,ls='')
++plt.plot(ASIA_LON_f,ASIA_LAT_f,          color='k',marker='.',ms=1,ls='')
++plt.plot(OCEANIA_LON_f,OCEANIA_LAT_f,    color='k',marker='.',ms=1,ls='')
++plt.plot(Africa_LON_f,Africa_LAT_f,      color='k',marker='.',ms=1,ls='')
++plt.plot(N_America_LON_f,N_America_LAT_f,color='k',marker='.',ms=1,ls='')
++plt.plot(SPARTAN_LON_f,SPARTAN_LAT_f,    color='k',marker='.',ms=1,ls='')
  plt.savefig('worldmap_25.01.21.png', dpi=300)
 -plt.show()
-+plt.savefig('worldmap_25.01.21.svg')
++plt.savefig('worldmap_25.01.21.pdf')
 +plt.show()
 \ No newline at end of file

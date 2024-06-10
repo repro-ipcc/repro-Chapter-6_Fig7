@@ -5,6 +5,10 @@ conda activate ipcc_ch6f7
 
 DIR=Chapter-6_Fig7
 
+# Get the source figure
+# wget https://www.ipcc.ch/report/ar6/wg1/downloads/figures/IPCC_AR6_WGI_Figure_6_7.png
+
+
 # Apply changes to produce figure of $DIR
 
 echo Patching $DIR
@@ -12,7 +16,7 @@ cd $DIR
 
 patch < ../${DIR}.patch
 
-# run the code
+# Run the code
 PYTHON_SCRIPT="Fig6.7_violin_regions.py"
 
 # Loop through all regionnum values
@@ -38,13 +42,13 @@ do
     python $PYTHON_SCRIPT $regionnum
     echo "Plot for region $regionnum has been generated."
     # move the figure
-    mv ${regions[$regionnum]}.png ../Fig_6_7_${regions[$regionnum]}.png
-    mv ${regions[$regionnum]}.svg ../Fig_6_7_${regions[$regionnum]}.svg
+    mv ${regions[$regionnum]}.png ../IPCC_AR6_WGI_Figure_6_7_${regions[$regionnum]}.png
+    mv ${regions[$regionnum]}.pdf ../IPCC_AR6_WGI_Figure_6_7_${regions[$regionnum]}.pdf
 done
 
 python Fig6.7_worldmap_AR6_nocoasts.py
-mv worldmap_25.01.21.png ../Fig_6_7_worldmap_25.01.21.png
-mv worldmap_25.01.21.svg ../Fig_6_7_worldmap_25.01.21.svg
+mv worldmap_25.01.21.png ../IPCC_AR6_WGI_Figure_6_7_worldmap_25.01.21.png
+mv worldmap_25.01.21.pdf ../IPCC_AR6_WGI_Figure_6_7_worldmap_25.01.21.pdf
 
 echo "All plots have been generated."
 

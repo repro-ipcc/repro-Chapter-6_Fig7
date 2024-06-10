@@ -1,4 +1,4 @@
-# ipcc-ar6-wg1-figure Chapter 7 Figure 6
+# ipcc-ar6-wg1-figure Chapter 6 Figure 7
 
 
 
@@ -40,5 +40,11 @@ To re-create the figure of Chapter 6 Figure 7:
 bash run.sh
 ```
 
-SVGs and PNGs will be generated in the root path
+PDFs and PNGs will be generated in the root path
 
+
+## Issues
+
+### 2024-06-10
+
+The generated images are part of the final figure and need to be combined into one big image. Additionally, the x-axis labels are missing.
